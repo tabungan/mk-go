@@ -1,5 +1,5 @@
 package mk
 
-func Scaffolding(basePath string, entry Entry) {
-	entry.Scaffold(basePath)
+func Scaffolding(basePath string, entry Entry) error {
+	return entry.Scaffold(basePath)
 }

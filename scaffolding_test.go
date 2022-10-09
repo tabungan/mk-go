@@ -1,6 +1,7 @@
 package mk
 
 import (
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -8,11 +9,12 @@ import (
 
 type mockEntry struct {
 	basePathInput string
+	errOutput     error
 }
 
 func (entry *mockEntry) Scaffold(basePath string) error {
 	entry.basePathInput = basePath
-	return nil
+	return entry.errOutput
 }
 
 func TestScaffolding(t *testing.T) {
@@ -23,5 +25,10 @@ func TestScaffolding(t *testing.T) {
 		Scaffolding(basePath, &entry)
 
 		assert.Equal(t, basePath, entry.basePathInput)
+	})
+
+	t.Run("forward error from scaffold", func(t *testing.T) {
+		entry := mockEntry{errOutput: os.ErrExist}
+		assert.Error(t, Scaffolding(basePath, &entry), os.ErrExist)
 	})
 }
