@@ -32,3 +32,14 @@ func TestScaffolding(t *testing.T) {
 		assert.Error(t, Scaffolding(basePath, &entry), os.ErrExist)
 	})
 }
+
+func TestScaffoldingOrPanic(t *testing.T) {
+	basePath := t.TempDir()
+
+	t.Run("call scaffold and pass base path", func(t *testing.T) {
+		var entry mockEntry
+		ScaffoldingOrPanic(basePath, &entry)
+
+		assert.Equal(t, basePath, entry.basePathInput)
+	})
+}
