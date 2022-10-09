@@ -5,5 +5,7 @@ func Scaffolding(basePath string, entry Entry) error {
 }
 
 func ScaffoldingOrPanic(basePath string, entry Entry) {
-	Scaffolding(basePath, entry)
+	if err := Scaffolding(basePath, entry); err != nil {
+		panic(err)
+	}
 }

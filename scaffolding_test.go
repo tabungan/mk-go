@@ -42,4 +42,11 @@ func TestScaffoldingOrPanic(t *testing.T) {
 
 		assert.Equal(t, basePath, entry.basePathInput)
 	})
+
+	t.Run("panic if got error from scaffold", func(t *testing.T) {
+		entry := mockEntry{errOutput: os.ErrExist}
+		assert.PanicsWithError(t, os.ErrExist.Error(), func() {
+			ScaffoldingOrPanic(basePath, &entry)
+		})
+	})
 }
