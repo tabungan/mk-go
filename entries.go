@@ -4,7 +4,9 @@ type Entries []Entry
 
 func (entries Entries) Scaffold(basePath string) error {
 	for _, entry := range entries {
-		entry.Scaffold(basePath)
+		if err := entry.Scaffold(basePath); err != nil {
+			return err
+		}
 	}
 	return nil
 }
