@@ -10,6 +10,5 @@ type Dir struct {
 }
 
 func (dir Dir) Scaffold(basePath string) error {
-	os.Mkdir(filepath.Join(basePath, dir.Name), 0700)
-	return nil
+	return os.Mkdir(filepath.Join(basePath, dir.Name), 0700)
 }
