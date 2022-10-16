@@ -3,6 +3,8 @@ package mk
 type Entries []Entry
 
 func (entries Entries) Scaffold(basePath string) error {
-	entries[0].Scaffold(basePath)
+	for _, entry := range entries {
+		entry.Scaffold(basePath)
+	}
 	return nil
 }
