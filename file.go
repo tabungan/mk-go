@@ -10,6 +10,5 @@ type File struct {
 }
 
 func (file File) Scaffold(basePath string) error {
-	os.WriteFile(filepath.Join(basePath, file.Name), []byte{}, 0600)
-	return nil
+	return os.WriteFile(filepath.Join(basePath, file.Name), []byte{}, 0600)
 }

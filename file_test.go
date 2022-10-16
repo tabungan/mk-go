@@ -19,4 +19,14 @@ func TestFile_Scaffold(t *testing.T) {
 			assert.FileExists(t, filepath.Join(basePath, "file"))
 		})
 	})
+
+	t.Run("fails if cannot create file", func(t *testing.T) {
+		ScaffoldingOrPanic(basePath, Dir{
+			Name: "dir",
+		})
+
+		assert.Error(t, Scaffolding(basePath, File{
+			Name: "dir",
+		}))
+	})
 }
