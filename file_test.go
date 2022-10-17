@@ -1,6 +1,7 @@
 package mk
 
 import (
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -11,10 +12,22 @@ func TestFile_Scaffold(t *testing.T) {
 	basePath := t.TempDir()
 
 	t.Run("creates file", func(t *testing.T) {
-		ScaffoldingOrPanic(basePath, File{Name: "file"})
+		ScaffoldingOrPanic(basePath, File{
+			Name: "file",
+
+			Content: []byte("content"),
+		})
+
+		path := filepath.Join(basePath, "file")
 
 		t.Run("with name as specified", func(t *testing.T) {
-			assert.FileExists(t, filepath.Join(basePath, "file"))
+			assert.FileExists(t, path)
+		})
+
+		t.Run("with content as specified", func(t *testing.T) {
+			if content, err := os.ReadFile(path); assert.NoError(t, err) {
+				assert.Equal(t, []byte("content"), content)
+			}
 		})
 	})
 
