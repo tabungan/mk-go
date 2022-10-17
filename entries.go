@@ -2,6 +2,19 @@ package mk
 
 import "sync"
 
+type Entries []Entry
+
+func (entries Entries) Scaffold(basePath string) error {
+	runner := initEntriesRunner()
+
+	for _, entry := range entries {
+		runner.scheduleProcessing(basePath, entry)
+	}
+	runner.unblockErrorChannelOnCompletion()
+
+	return runner.fetchFirstErrorAndDrainOthers()
+}
+
 type entriesRunner struct {
 	errChan chan error
 	wg      sync.WaitGroup
@@ -42,17 +55,4 @@ func (runner *entriesRunner) fetchFirstErrorAndDrainOthers() error {
 		}
 	})()
 	return firstErr
-}
-
-type Entries []Entry
-
-func (entries Entries) Scaffold(basePath string) error {
-	runner := initEntriesRunner()
-
-	for _, entry := range entries {
-		runner.scheduleProcessing(basePath, entry)
-	}
-	runner.unblockErrorChannelOnCompletion()
-
-	return runner.fetchFirstErrorAndDrainOthers()
 }
