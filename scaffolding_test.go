@@ -33,12 +33,12 @@ func TestScaffolding(t *testing.T) {
 	})
 }
 
-func TestScaffoldingOrPanic(t *testing.T) {
+func TestScaffoldOrPanic(t *testing.T) {
 	basePath := t.TempDir()
 
 	t.Run("calls scaffold and pass base path", func(t *testing.T) {
 		var entry mockEntry
-		ScaffoldingOrPanic(basePath, &entry)
+		ScaffoldOrPanic(basePath, &entry)
 
 		assert.Equal(t, basePath, entry.basePathInput)
 	})
@@ -46,7 +46,7 @@ func TestScaffoldingOrPanic(t *testing.T) {
 	t.Run("panics if got error from scaffold", func(t *testing.T) {
 		entry := mockEntry{errOutput: os.ErrExist}
 		assert.PanicsWithError(t, os.ErrExist.Error(), func() {
-			ScaffoldingOrPanic(basePath, &entry)
+			ScaffoldOrPanic(basePath, &entry)
 		})
 	})
 }

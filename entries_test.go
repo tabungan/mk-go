@@ -11,7 +11,7 @@ func TestEntries_Scaffold(t *testing.T) {
 	basePath := t.TempDir()
 
 	t.Run("scaffolds entries", func(t *testing.T) {
-		ScaffoldingOrPanic(basePath, Entries{
+		ScaffoldOrPanic(basePath, Entries{
 			Dir{Name: "dir"},
 			File{Name: "file"},
 		})
@@ -26,7 +26,7 @@ func TestEntries_Scaffold(t *testing.T) {
 	})
 
 	t.Run("fails if one entry cannot be scaffolded", func(t *testing.T) {
-		ScaffoldingOrPanic(basePath, File{Name: "file"})
+		ScaffoldOrPanic(basePath, File{Name: "file"})
 
 		assert.Error(t, Scaffolding(basePath, Entries{
 			Dir{Name: "file"},
