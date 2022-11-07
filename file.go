@@ -18,5 +18,5 @@ type File struct {
 
 // Scaffold scaffolds a file on the top of basePath.
 func (file File) Scaffold(basePath string) error {
-	return os.WriteFile(filepath.Join(basePath, file.Name), file.Content, 0600)
+	return os.WriteFile(filepath.Join(basePath, file.Name), file.Content, os.ModePerm)
 }
