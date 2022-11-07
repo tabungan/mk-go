@@ -34,6 +34,6 @@ func TestFile_Scaffold(t *testing.T) {
 	t.Run("fails if cannot create file", func(t *testing.T) {
 		ScaffoldOrPanic(basePath, Dir{Name: "dir"})
 
-		assert.Error(t, Scaffolding(basePath, File{Name: "dir"}))
+		assert.Error(t, Scaffold(basePath, File{Name: "dir"}))
 	})
 }

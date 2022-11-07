@@ -17,19 +17,19 @@ func (entry *mockEntry) Scaffold(basePath string) error {
 	return entry.errOutput
 }
 
-func TestScaffolding(t *testing.T) {
+func TestScaffold(t *testing.T) {
 	basePath := t.TempDir()
 
 	t.Run("calls scaffold and pass base path", func(t *testing.T) {
 		var entry mockEntry
-		Scaffolding(basePath, &entry)
+		Scaffold(basePath, &entry)
 
 		assert.Equal(t, basePath, entry.basePathInput)
 	})
 
 	t.Run("forwards error from scaffold", func(t *testing.T) {
 		entry := mockEntry{errOutput: os.ErrExist}
-		assert.Error(t, Scaffolding(basePath, &entry), os.ErrExist)
+		assert.Error(t, Scaffold(basePath, &entry), os.ErrExist)
 	})
 }
 

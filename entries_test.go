@@ -28,7 +28,7 @@ func TestEntries_Scaffold(t *testing.T) {
 	t.Run("fails if one entry cannot be scaffolded", func(t *testing.T) {
 		ScaffoldOrPanic(basePath, File{Name: "file"})
 
-		assert.Error(t, Scaffolding(basePath, Entries{
+		assert.Error(t, Scaffold(basePath, Entries{
 			Dir{Name: "file"},
 		}))
 	})

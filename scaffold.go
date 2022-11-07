@@ -1,11 +1,11 @@
 package mk
 
-func Scaffolding(basePath string, entry Entry) error {
+func Scaffold(basePath string, entry Entry) error {
 	return entry.Scaffold(basePath)
 }
 
 func ScaffoldOrPanic(basePath string, entry Entry) {
-	if err := Scaffolding(basePath, entry); err != nil {
+	if err := Scaffold(basePath, entry); err != nil {
 		panic(err)
 	}
 }
