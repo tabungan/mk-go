@@ -20,7 +20,7 @@ type Dir struct {
 func (dir Dir) Scaffold(basePath string) error {
 	path := filepath.Join(basePath, dir.Name)
 
-	err := os.Mkdir(path, 0700)
+	err := os.Mkdir(path, os.ModePerm)
 	if err != nil {
 		return err
 	}
