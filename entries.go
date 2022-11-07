@@ -2,8 +2,10 @@ package mk
 
 import "sync"
 
+// Type Entries is a building block for scaffolding entries.
 type Entries []Entry
 
+// Scaffold scaffolds entries on the top of basePath.
 func (entries Entries) Scaffold(basePath string) error {
 	runner := initEntriesRunner()
 
